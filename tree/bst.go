@@ -62,6 +62,27 @@ func add(root *Node, e int) *Node {
 	return root
 }
 
+// 判断元素e是否在树中
+func (bst *BinarySearchTree) Contains(e int) bool {
+
+	return contains(bst.Root, e)
+}
+
+// Contains的辅助方法
+func contains(root *Node, e int) bool {
+	if root == nil {
+		return false
+	}
+
+	if root.Data == e {
+		return true
+	} else if root.Data > e {
+		return contains(root.Left, e)
+	} else {
+		return contains(root.Right, e)
+	}
+}
+
 // 二叉树的先序遍历
 func (bst *BinarySearchTree) PreOrder(root *Node) {
 	if root == nil {
