@@ -1,6 +1,7 @@
 package tree
 
 import (
+	"data-struct/queue"
 	"data-struct/stack"
 	"fmt"
 )
@@ -113,6 +114,29 @@ func (bst *BinarySearchTree) PostOrder(root *Node) {
 	bst.PostOrder(root.Left)
 	bst.PostOrder(root.Right)
 	fmt.Println(root.Data)
+}
+
+// 二叉搜索树的层序遍历
+func (bst *BinarySearchTree) LevelOrder(root *Node) {
+	// 借助队列实现层序遍历
+	var q queue.Queue
+	q.Init()
+
+	// 根节点入队列
+	q.Push(root)
+
+	for !q.IsEmpty() {
+		// 根节点出队列，然后左右子树的根节点分别入队列
+		res := q.Pop().(*Node)
+		fmt.Println(res.Data)
+		if res.Left != nil {
+			q.Push(res.Left)
+		}
+		if res.Right != nil {
+			q.Push(res.Right)
+		}
+	}
+
 }
 
 // 前序遍历的非递归实现

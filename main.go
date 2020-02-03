@@ -53,4 +53,7 @@ func testBst() {
 	// 非递归实现的前序遍历
 	fmt.Println("-------------", "非递归前序遍历")
 	root.PreOrderNoneRecursive(root.Root)
+	// 层序遍历
+	fmt.Println("-------------  层序遍历  -----------------")
+	root.LevelOrder(root.Root)
 }
