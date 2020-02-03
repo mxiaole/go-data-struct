@@ -1,6 +1,9 @@
 package tree
 
-import "fmt"
+import (
+	"data-struct/stack"
+	"fmt"
+)
 
 /**
 二叉搜索树
@@ -64,7 +67,6 @@ func add(root *Node, e int) *Node {
 
 // 判断元素e是否在树中
 func (bst *BinarySearchTree) Contains(e int) bool {
-
 	return contains(bst.Root, e)
 }
 
@@ -83,7 +85,7 @@ func contains(root *Node, e int) bool {
 	}
 }
 
-// 二叉树的先序遍历
+// 二叉搜索树的先序遍历
 func (bst *BinarySearchTree) PreOrder(root *Node) {
 	if root == nil {
 		return
@@ -91,4 +93,46 @@ func (bst *BinarySearchTree) PreOrder(root *Node) {
 	fmt.Println(root.Data)
 	bst.PreOrder(root.Left)
 	bst.PreOrder(root.Right)
+}
+
+// 二叉搜索树的中序遍历
+func (bst *BinarySearchTree) MidOrder(root *Node) {
+	if root == nil {
+		return
+	}
+	bst.MidOrder(root.Left)
+	fmt.Println(root.Data)
+	bst.MidOrder(root.Right)
+}
+
+// 二叉搜索树的后序遍历
+func (bst *BinarySearchTree) PostOrder(root *Node) {
+	if root == nil {
+		return
+	}
+	bst.PostOrder(root.Left)
+	bst.PostOrder(root.Right)
+	fmt.Println(root.Data)
+}
+
+// 前序遍历的非递归实现
+// 借助一个栈来实现：首先将树的根节点放入栈中，然后根节点出栈，同时根节点的左右节点依次入栈
+func (bst *BinarySearchTree) PreOrderNoneRecursive(root *Node) {
+	// 定义一个栈
+	var s stack.Stack
+	s.Init()
+	// root入栈
+	s.Push(root)
+
+	for !s.IsEmpty() {
+		res := s.Pop().(*Node)
+		fmt.Println(res.Data)
+		// root右、左节点依次入栈
+		if res.Right != nil {
+			s.Push(res.Right)
+		}
+		if res.Left != nil {
+			s.Push(res.Left)
+		}
+	}
 }
