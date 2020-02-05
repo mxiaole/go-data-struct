@@ -1,6 +1,7 @@
 package main
 
 import (
+	heap2 "data-struct/heap"
 	mymap "data-struct/map"
 	"data-struct/set"
 	"data-struct/stack"
@@ -112,9 +113,24 @@ func testMap() {
 	fmt.Println(m.GetSize())
 }
 
+// heap测试
+func testHeap() {
+	var heap heap2.SliceHeap
+	heap.Init()
+	heap.Add(1)
+	heap.Add(10)
+	heap.Add(2)
+	heap.Add(8)
+	heap.Add(9)
+	heap.Add(5)
+
+	fmt.Println(heap.GetSize())
+	fmt.Println(heap.Remove())
+}
 func main() {
 	//testBst()
 	//testStack()
 	//testSet()
-	testMap()
+	//testMap()
+	testHeap()
 }
