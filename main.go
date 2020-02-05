@@ -34,9 +34,11 @@ func testBst() {
 
 	fmt.Println(root.GetSize())
 
+	root.Insert(9)
+	root.Insert(7)
+	root.Insert(13)
+	root.Insert(8)
 	root.Insert(10)
-	root.Insert(20)
-	root.Insert(30)
 	root.Insert(15)
 	fmt.Println(root.GetSize())
 	fmt.Println("前序遍历结果")
@@ -55,5 +57,19 @@ func testBst() {
 	root.PreOrderNoneRecursive(root.Root)
 	// 层序遍历
 	fmt.Println("-------------  层序遍历  -----------------")
+	root.LevelOrder(root.Root)
+	// 查找最小值
+	fmt.Println("最小值", root.Minimum(root.Root))
+	// 查找最大值
+	fmt.Println("最大值", root.Maximum(root.Root))
+	// 删除最小值
+	root.Root = root.RemoveMin(root.Root)
+	// 删除之后层序遍历
+	fmt.Println("删除最小值之后的层序遍历结果")
+	root.LevelOrder(root.Root)
+	// 删除最大值
+	root.Root = root.RemoveMax(root.Root)
+	// 删除之后层序遍历
+	fmt.Println("删除最大值之后的层序遍历结果")
 	root.LevelOrder(root.Root)
 }

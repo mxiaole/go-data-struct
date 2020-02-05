@@ -160,3 +160,48 @@ func (bst *BinarySearchTree) PreOrderNoneRecursive(root *Node) {
 		}
 	}
 }
+
+// 查找树中的最小值
+func (bst *BinarySearchTree) Minimum(root *Node) int {
+	// 找到最小值
+	cur := root
+	for cur.Left != nil {
+		cur = cur.Left
+	}
+
+	return cur.Data
+}
+
+// 查找树中的最大值
+func (bst *BinarySearchTree) Maximum(root *Node) int {
+	cur := root
+	for cur.Right != nil {
+		cur = cur.Right
+	}
+
+	return cur.Data
+}
+
+// 删除二分搜索树中的最小值
+func (bst *BinarySearchTree) RemoveMin(root *Node) *Node {
+	// 如果删除的节点的根节点的左子树为空，那么这个根节点就是要删除的节点
+	if root.Left == nil {
+		right := root.Right // 先保存它的右子树
+		bst.Size--
+		return right
+	}
+	root.Left = bst.RemoveMin(root.Left)
+	return root
+}
+
+// 删除二分搜索树中的最大值
+func (bst *BinarySearchTree) RemoveMax(root *Node) *Node {
+	if root.Right == nil {
+		left := root.Left
+		bst.Size--
+		return left
+	}
+
+	root.Right = bst.RemoveMax(root.Right)
+	return root
+}
