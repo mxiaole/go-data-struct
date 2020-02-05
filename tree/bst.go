@@ -43,23 +43,23 @@ func (bst *BinarySearchTree) IsEmpty() bool {
 
 // 向二分搜索树中添加节点
 func (bst *BinarySearchTree) Insert(e int) {
-	bst.Root = add(bst.Root, e)
-	bst.Size++
+	bst.Root = add(bst.Root, e, &bst.Size)
 }
 
 // Insert方法的辅助方法：
 // 输入：一个二叉树的根节点和待插入的元素e
 // 输出: 二分搜索树的根节点
-func add(root *Node, e int) *Node {
+func add(root *Node, e int, size *int) *Node {
 	// 如果根节点为空，那么直接创建给节点就可以
 	if root == nil {
+		*size++
 		return &Node{Data: e, Left: nil, Right: nil}
 	}
 	// 如果根节点不是空，就需要判断元素e是放在左孩子还是右孩子
 	if e < root.Data { // 如果元素e大于左孩子
-		root.Left = add(root.Left, e)
+		root.Left = add(root.Left, e, size)
 	} else if e > root.Data {
-		root.Right = add(root.Right, e)
+		root.Right = add(root.Right, e, size)
 	}
 
 	// 如果元素e和当前的root.data值相同就忽略
@@ -227,7 +227,7 @@ func (bst *BinarySearchTree) Remove(root *Node, e int) *Node {
 		return left
 	}
 	// 如果该节点只有右子树
-	if root.Right == nil {
+	if root.Left == nil {
 		// 保存该节点的右子树
 		right := root.Right
 		bst.Size--

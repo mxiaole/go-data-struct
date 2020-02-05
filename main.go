@@ -1,6 +1,7 @@
 package main
 
 import (
+	"data-struct/set"
 	"data-struct/stack"
 	"data-struct/tree"
 	"fmt"
@@ -24,10 +25,12 @@ func testStack() {
 }
 
 func main() {
-	testBst()
+	//testBst()
 	//testStack()
+	testSet()
 }
 
+// bst测试
 func testBst() {
 	var t *tree.BinarySearchTree
 	root := t.Init()
@@ -72,4 +75,28 @@ func testBst() {
 	// 删除之后层序遍历
 	fmt.Println("删除最大值之后的层序遍历结果")
 	root.LevelOrder(root.Root)
+
+	// 删除树中的值为9的节点
+	fmt.Println("删除了值为9的节点层序遍历结果")
+	root.Root = root.Remove(root.Root, 9)
+	root.LevelOrder(root.Root)
+}
+
+//set测试
+func testSet() {
+	var s set.BstSet
+	s.Init()
+	s.Add(10)
+	s.Add(10)
+	s.Add(10)
+	s.Add(10)
+	s.Add(10)
+	s.Add(20)
+	s.Add(20)
+	fmt.Println("集合中元素的个数是: ", s.GetSize())
+	fmt.Println("集合中是否包含元素20", s.Contains(20))
+	s.Remove(10)
+	fmt.Println("集合中元素的个数是: ", s.GetSize())
+	fmt.Println("集合中是否包含元素10", s.Contains(10))
+
 }
