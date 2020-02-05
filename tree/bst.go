@@ -162,24 +162,24 @@ func (bst *BinarySearchTree) PreOrderNoneRecursive(root *Node) {
 }
 
 // 查找树中的最小值
-func (bst *BinarySearchTree) Minimum(root *Node) int {
+func (bst *BinarySearchTree) Minimum(root *Node) *Node {
 	// 找到最小值
 	cur := root
 	for cur.Left != nil {
 		cur = cur.Left
 	}
 
-	return cur.Data
+	return cur
 }
 
 // 查找树中的最大值
-func (bst *BinarySearchTree) Maximum(root *Node) int {
+func (bst *BinarySearchTree) Maximum(root *Node) *Node {
 	cur := root
 	for cur.Right != nil {
 		cur = cur.Right
 	}
 
-	return cur.Data
+	return cur
 }
 
 // 删除二分搜索树中的最小值
@@ -204,4 +204,42 @@ func (bst *BinarySearchTree) RemoveMax(root *Node) *Node {
 
 	root.Right = bst.RemoveMax(root.Right)
 	return root
+}
+
+// 删除二分搜索树的元素e
+// root为一个树的跟根节点，返回是删除了指定元素的树的根节点
+func (bst *BinarySearchTree) Remove(root *Node, e int) *Node {
+	if root == nil {
+		return nil
+	}
+	if root.Data > e { // e在root为根的树的左子树上
+		root.Left = bst.Remove(root.Left, e)
+		return root
+	} else if root.Data < e {
+		root.Right = bst.Remove(root.Right, e)
+		return root
+	}
+	// 如果该节点只有左子树
+	if root.Right == nil {
+		// 保存该节点的左子树
+		left := root.Left
+		bst.Size--
+		return left
+	}
+	// 如果该节点只有右子树
+	if root.Right == nil {
+		// 保存该节点的右子树
+		right := root.Right
+		bst.Size--
+		return right
+	}
+
+	// 如果该节点既有左子树又有右子树
+	// 找到替换该节点的节点, 该节点是它的右子树中的最小值
+	node := bst.Minimum(root.Right)
+	// 	设置node的右子树
+	node.Right = bst.RemoveMin(root.Right) // 替换的节点的右子树为，将root右子树中的最小值的树的根
+	// 设置node的左子树
+	node.Left = root.Left
+	return node
 }
