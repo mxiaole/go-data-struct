@@ -43,45 +43,45 @@ func (s *BstSet) Contains(e int) bool {
 
 // 使用slice实现一个集合
 type SliceSet struct {
-	Data []int
-	Size int
+	data []int
+	size int
 }
 
 func (s *SliceSet) Init() {
 
 }
 func (s *SliceSet) GetSize() int {
-	return len(s.Data)
+	return len(s.data)
 }
 func (s *SliceSet) IsEmpty() bool {
-	return len(s.Data) == 0
+	return len(s.data) == 0
 }
 
 func (s *SliceSet) Add(e int) {
 	// 先判断元素是否存在
-	for _, d := range s.Data {
+	for _, d := range s.data {
 		if e == d {
 			return
 		}
 	}
 
-	s.Data = append(s.Data, e)
+	s.data = append(s.data, e)
 }
 
 func (s *SliceSet) Remove(e int) {
 	// 确定删除位置
 	var index int
-	for i, d := range s.Data {
+	for i, d := range s.data {
 		if d == e {
 			index = i
 		}
 	}
 
-	s.Data = append(s.Data[:index], s.Data[index+1:]...)
+	s.data = append(s.data[:index], s.data[index+1:]...)
 }
 
 func (s *SliceSet) Contains(e int) bool {
-	for _, d := range s.Data {
+	for _, d := range s.data {
 		if d == e {
 			return true
 		}

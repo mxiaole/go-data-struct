@@ -1,6 +1,7 @@
 package main
 
 import (
+	mymap "data-struct/map"
 	"data-struct/set"
 	"data-struct/stack"
 	"data-struct/tree"
@@ -22,12 +23,6 @@ func testStack() {
 	r = s.Pop()
 	fmt.Println(r)
 
-}
-
-func main() {
-	//testBst()
-	//testStack()
-	testSet()
 }
 
 // bst测试
@@ -100,4 +95,26 @@ func testSet() {
 	fmt.Println("集合中元素的个数是: ", s.GetSize())
 	fmt.Println("集合中是否包含元素10", s.Contains(10))
 
+}
+
+// map测试
+func testMap() {
+	var m mymap.SliceMap
+	m.Init()
+
+	m.Add("name", "cody")
+	fmt.Println(m.Get("name"))
+	fmt.Println(m.GetSize())
+	m.Add("sex", "man")
+	fmt.Println(m.GetSize())
+	m.Remove("name")
+	fmt.Println(m.Get("cody"))
+	fmt.Println(m.GetSize())
+}
+
+func main() {
+	//testBst()
+	//testStack()
+	//testSet()
+	testMap()
 }
