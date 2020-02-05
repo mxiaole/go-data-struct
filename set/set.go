@@ -40,3 +40,52 @@ func (s *BstSet) Remove(e int) {
 func (s *BstSet) Contains(e int) bool {
 	return s.tree.Contains(e)
 }
+
+// 使用slice实现一个集合
+type SliceSet struct {
+	Data []int
+	Size int
+}
+
+func (s *SliceSet) Init() {
+
+}
+func (s *SliceSet) GetSize() int {
+	return len(s.Data)
+}
+func (s *SliceSet) IsEmpty() bool {
+	return len(s.Data) == 0
+}
+
+func (s *SliceSet) Add(e int) {
+	// 先判断元素是否存在
+	for _, d := range s.Data {
+		if e == d {
+			return
+		}
+	}
+
+	s.Data = append(s.Data, e)
+}
+
+func (s *SliceSet) Remove(e int) {
+	// 确定删除位置
+	var index int
+	for i, d := range s.Data {
+		if d == e {
+			index = i
+		}
+	}
+
+	s.Data = append(s.Data[:index], s.Data[index+1:]...)
+}
+
+func (s *SliceSet) Contains(e int) bool {
+	for _, d := range s.Data {
+		if d == e {
+			return true
+		}
+	}
+
+	return false
+}

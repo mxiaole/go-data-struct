@@ -84,7 +84,8 @@ func testBst() {
 
 //set测试
 func testSet() {
-	var s set.BstSet
+	//var s set.BstSet
+	var s set.SliceSet
 	s.Init()
 	s.Add(10)
 	s.Add(10)
