@@ -3,6 +3,7 @@ package main
 import (
 	heap2 "data-struct/heap"
 	mymap "data-struct/map"
+	"data-struct/queue"
 	"data-struct/set"
 	"data-struct/stack"
 	"data-struct/tree"
@@ -127,10 +128,26 @@ func testHeap() {
 	fmt.Println(heap.GetSize())
 	fmt.Println(heap.Remove())
 }
+
+func testPriorityQueue() {
+	var q queue.PriorityQueue
+	q.Init()
+	q.Push(10)
+	q.Push(20)
+	q.Push(30)
+	q.Push(15)
+
+	fmt.Println(q.Pop())
+	fmt.Println(q.Pop())
+	fmt.Println(q.Pop())
+	fmt.Println(q.Pop())
+
+}
 func main() {
 	//testBst()
 	//testStack()
 	//testSet()
 	//testMap()
-	testHeap()
+	//testHeap()
+	testPriorityQueue()
 }

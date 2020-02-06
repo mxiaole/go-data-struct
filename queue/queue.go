@@ -1,5 +1,13 @@
 package queue
 
+type Q interface {
+	Init()
+	Push(e interface{})
+	Pop() interface{}
+	GetSize() int
+	IsEmpty() bool
+}
+
 // 使用slice实现queue
 
 // 定义队列

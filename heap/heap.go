@@ -6,10 +6,12 @@ type SliceHeap struct {
 
 type Heap interface {
 	Init()
-	GetSize() int  // 获取堆中元素
-	IsEmpty() bool // 判断堆是否为空
-	Add(e int)     // 向堆中添加元素
-	Remove() int   // 从堆中取出最大的元素
+	GetSize() int      // 获取堆中元素
+	IsEmpty() bool     // 判断堆是否为空
+	Add(e int)         // 向堆中添加元素
+	Remove() int       // 从堆中取出最大的元素
+	Replace(e int)     // 将堆中的最大值，替换成元素e
+	Heapify(arr []int) // 将给定的数组初始化为一个堆
 }
 
 // 获取index下标的父节点的下标
@@ -57,17 +59,16 @@ func siftDown(index int, heap *SliceHeap) {
 			} else {
 				maxIndex = leftIndex + 1
 			}
-
-			// index和maxIndex对应的元素比较
-			if heap.data[index] > heap.data[maxIndex] { // 如果index元素比左右孩子的值都大，不用下沉
-				break
-			}
-
-			// 交换index和maxIndex
-			swap(index, maxIndex, heap.data)
-			index = maxIndex
+		} else {
+			maxIndex = leftIndex
 		}
-
+		// index和maxIndex对应的元素比较
+		if heap.data[index] > heap.data[maxIndex] { // 如果index元素比左右孩子的值都大，不用下沉
+			break
+		}
+		// 交换index和maxIndex
+		swap(index, maxIndex, heap.data)
+		index = maxIndex
 	}
 }
 func (heap *SliceHeap) Init() {
@@ -99,4 +100,18 @@ func (heap *SliceHeap) Remove() int {
 	siftDown(0, heap)
 
 	return ret
+}
+
+func (heap *SliceHeap) Replace(e int) {
+	// 1. 将元素e直接和堆顶元素进行替换
+	heap.data[0] = e
+	// 2. 将堆顶元素进行siftDown
+	siftDown(0, heap)
+}
+
+func (heap *SliceHeap) Heapify(arr []int) {
+	// 从最后一个非叶子节点（最后一个元素的父节点）开始，从后向前进行sift-down
+	for i := parent(len(arr) - 1); i > 0; i-- {
+		siftDown(i, heap)
+	}
 }
