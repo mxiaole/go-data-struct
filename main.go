@@ -143,11 +143,21 @@ func testPriorityQueue() {
 	fmt.Println(q.Pop())
 
 }
+
+// 线段树测试
+func testSegmentTree() {
+	var st tree.SegmentTree
+	var array = []interface{}{1, 3, 10, 20, 10}
+	st.Init(array)
+
+	fmt.Println(st.Query(1, 2))
+}
 func main() {
 	//testBst()
 	//testStack()
 	//testSet()
 	//testMap()
 	//testHeap()
-	testPriorityQueue()
+	//testPriorityQueue()
+	testSegmentTree()
 }
