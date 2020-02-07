@@ -175,9 +175,15 @@ func testGraph() {
 
 // 字典树测试
 func testTrie() {
-	var tree *tree.Trie
-	tree.Init()
-	fmt.Println(tree.GetSize())
+	t := new(tree.Trie)
+	t.Init()
+	//fmt.Println(t.GetSize())
+	t.Add("world")
+	//fmt.Println(t.GetSize())
+	t.Add("word")
+	t.Add("hello")
+	//fmt.Println(t.GetSize())
+	fmt.Println(t.IsPrefix("this"))
 }
 func main() {
 	//testBst()
@@ -188,5 +194,5 @@ func main() {
 	//testPriorityQueue()
 	//testSegmentTree()
 	//testGraph()
-	//testTrie()
+	testTrie()
 }
