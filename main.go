@@ -151,6 +151,9 @@ func testSegmentTree() {
 	st.Init(array)
 
 	fmt.Println(st.Query(1, 2))
+
+	st.Update(2, 3)
+	fmt.Println(st.Query(2, 3))
 }
 func main() {
 	//testBst()

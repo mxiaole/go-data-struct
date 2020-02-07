@@ -3,8 +3,8 @@ package tree
 // 线段树, 使用数组实现
 
 type SegmentTree struct {
-	data []interface{}
-	tree []interface{}
+	data []interface{} // 存放给定的数组
+	tree []interface{} // 线段树，存放给定数组某个区间的综合值
 }
 
 // 线段树的基本操作
@@ -77,4 +77,33 @@ func query(index, l, r, ql, qr int, tree *SegmentTree) interface{} {
 	rightResult := query(rightIndex, mid+1, r, mid+1, qr, tree)
 
 	return leftResult.(int) + rightResult.(int)
+}
+
+// 3. 更新线段树
+func (tree *SegmentTree) Update(index int, e interface{}) {
+	tree.data[index] = e // 更新给定的数组
+	// 更新线段树
+	update(0, 0, len(tree.data)-1, index, e, tree)
+}
+
+// 更新线段树的辅助函数
+// treeIndex: 线段树的根节点的索引，l, r 这个节点表示的区间
+// index: 给定数组待更新的索引，对应的是线段树的区间, e更新的值
+func update(treeIndex, l, r int, index int, e interface{}, tree *SegmentTree) {
+	if l == r {
+		tree.tree[treeIndex] = e
+		return
+	}
+
+	mid := l + (r-l)/2
+	leftIndex := leftChild(treeIndex)   // 表示的区间[l, mid]
+	rightIndex := rightChild(treeIndex) // 表示的区间[mid + 1, r]
+
+	if index >= mid+1 {
+		update(rightIndex, mid+1, r, index, e, tree)
+	} else {
+		update(leftIndex, l, mid, index, e, tree)
+	}
+
+	tree.tree[treeIndex] = tree.tree[leftIndex].(int) + tree.tree[rightIndex].(int)
 }
