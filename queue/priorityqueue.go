@@ -1,18 +1,18 @@
 package queue
 
 import (
-	heap2 "data-struct/heap"
+	"data-struct/tree"
 	"fmt"
 )
 
 // 使用堆实现一个优先级队列
 
 type PriorityQueue struct {
-	data *heap2.SliceHeap // 存放队列中的元素的二叉堆
+	data *tree.SliceHeap // 存放队列中的元素的二叉堆
 }
 
 func (q *PriorityQueue) Init() {
-	q.data = new(heap2.SliceHeap)
+	q.data = new(tree.SliceHeap)
 	q.data.Init()
 }
 func (q *PriorityQueue) Push(e interface{}) {

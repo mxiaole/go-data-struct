@@ -1,7 +1,7 @@
 package main
 
 import (
-	heap2 "data-struct/heap"
+	"data-struct/graph"
 	mymap "data-struct/map"
 	"data-struct/queue"
 	"data-struct/set"
@@ -116,7 +116,7 @@ func testMap() {
 
 // heap测试
 func testHeap() {
-	var heap heap2.SliceHeap
+	var heap tree.SliceHeap
 	heap.Init()
 	heap.Add(1)
 	heap.Add(10)
@@ -155,6 +155,22 @@ func testSegmentTree() {
 	st.Update(2, 3)
 	fmt.Println(st.Query(2, 3))
 }
+
+// 图测试
+func testGraph() {
+	var g graph.AdjMatrix
+	g.Init("graph/graph.txt")
+	var g2 graph.AdjList
+	g2.Init("graph/graph.txt")
+	g2.Print()
+	fmt.Println()
+	// 判断0和3是否有边
+	fmt.Println(g.HasEdge(0, 2))
+	// 获取顶点3的相邻的节点
+	fmt.Println(g.Adj(2))
+	// 获取顶点3的度
+	fmt.Println(g.Degree(2))
+}
 func main() {
 	//testBst()
 	//testStack()
@@ -162,5 +178,6 @@ func main() {
 	//testMap()
 	//testHeap()
 	//testPriorityQueue()
-	testSegmentTree()
+	//testSegmentTree()
+	testGraph()
 }
