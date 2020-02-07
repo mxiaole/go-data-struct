@@ -1,4 +1,4 @@
-package tree
+package heap
 
 type SliceHeap struct {
 	data []int // 存放堆中元素的slice

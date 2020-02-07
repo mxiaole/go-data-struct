@@ -2,6 +2,7 @@ package main
 
 import (
 	"data-struct/graph"
+	heap2 "data-struct/heap"
 	mymap "data-struct/map"
 	"data-struct/queue"
 	"data-struct/set"
@@ -116,7 +117,7 @@ func testMap() {
 
 // heap测试
 func testHeap() {
-	var heap tree.SliceHeap
+	var heap heap2.SliceHeap
 	heap.Init()
 	heap.Add(1)
 	heap.Add(10)
@@ -171,6 +172,13 @@ func testGraph() {
 	// 获取顶点3的度
 	fmt.Println(g.Degree(2))
 }
+
+// 字典树测试
+func testTrie() {
+	var tree *tree.Trie
+	tree.Init()
+	fmt.Println(tree.GetSize())
+}
 func main() {
 	//testBst()
 	//testStack()
@@ -179,5 +187,6 @@ func main() {
 	//testHeap()
 	//testPriorityQueue()
 	//testSegmentTree()
-	testGraph()
+	//testGraph()
+	//testTrie()
 }
