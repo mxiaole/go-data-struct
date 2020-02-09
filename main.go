@@ -185,6 +185,20 @@ func testTrie() {
 	//fmt.Println(t.GetSize())
 	fmt.Println(t.IsPrefix("this"))
 }
+
+// 并查集测试
+func testUnionFind() {
+	//uf := new(tree.UnionFind)
+	uf := new(tree.QuickUnion)
+	uf.Init(10)
+	uf.Print()
+
+	fmt.Println(uf.IsConnected(1, 3))
+
+	uf.UnionElements(1, 3)
+	uf.Print()
+	fmt.Print(uf.IsConnected(1, 3))
+}
 func main() {
 	//testBst()
 	//testStack()
@@ -194,5 +208,6 @@ func main() {
 	//testPriorityQueue()
 	//testSegmentTree()
 	//testGraph()
-	testTrie()
+	//testTrie()
+	testUnionFind()
 }
